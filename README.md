@@ -49,7 +49,7 @@ luks-<id> UUID=<id> none discard
 
 2. Delete the file "/crypto_keyfile.bin" (skip this step if you are using swap):
 4. Edit the intial ramdisk conf file `/etc/mkinitcpio.conf`
-Change this line from (skip this step if you are using swap):
+Change this line from (do NOT skip this step, even if you are using swap):
 `FILES="/crypto_keyfile.bin"`
 to:
 `#FILES="/crypto_keyfile.bin"`
