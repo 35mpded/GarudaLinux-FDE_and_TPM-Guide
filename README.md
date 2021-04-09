@@ -132,17 +132,17 @@ If you are using lts change `vmlinuz-linux-zen.img` and `initramfs-linux-zen.img
 
 ## Method 2 - Custom (WIP)
 
-Create the key
+1. Create the key
 ```
 dd if=/dev/random of=/root/secret.bin bs=32 count=1
 ```
 
-Add the key to luks (if you are using SWAP do it for both encrytped drives)
+2. Add the key to luks (if you are using SWAP do it for both encrytped drives)
 ```
 cryptsetup luksAddKey /dev/<your drive> /root/secret.bin
 ```
 
-Add key to TPM
+3. Add key to TPM
 ```
 tpm2_createpolicy --policy-pcr -l sha1:0,2,4,7 -L policy.digest
 tpm2_createprimary -C e -g sha1 -G rsa -c primary.context
@@ -152,11 +152,27 @@ tpm2_evictcontrol -C o -c load.context 0x81000000
 rm load.context obj.priv obj.pub policy.digest primary.context
 ```
 
-Unseal:
+4. Unseal:
 ```sh
 tpm2_unseal -c 0x81000000 -p pcr:sha1:0,7 -o /crypto_keyfile.bin
 ```
-Remove key from TPM:
+
+5. Rebuild inital ramdisk 
+```
+mkinitcpio -P
+```
+6. Avoid password prompt in GRUB (OPTIONAL)
+Rebuilt the EFI image using:
+```
+objcopy \
+    --add-section .osrel="/usr/lib/os-release" --change-section-vma .osrel=0x20000 \
+    --add-section .cmdline="/proc/cmdline" --change-section-vma .cmdline=0x30000 \
+    --add-section .linux="/boot/vmlinuz-linux-zen" --change-section-vma .linux=0x40000 \
+    --add-section .initrd="/boot/initramfs-linux-zen.img" --change-section-vma .initrd=0x3000000 \
+    "/usr/lib/systemd/boot/efi/linuxx64.efi.stub" "/boot/efi/EFI/Garuda/grubx64.efi"
+```
+After reboot you should get prompted to input the password manually. This behaviour is expected since you change your EFI image.
+Remove Remove key from TPM and redo step 3. :
 ```sh
 tpm2_evictcontrol -C o -c 0x81000000
 ```
