@@ -6,8 +6,11 @@ Make a backup of your data. If something fails, this guide could lead to irrever
 # Introduction
 
 Tested on:
-* garuda-dr460nized-linux-zen-210406 using GUI installer with default partitioning + FDE option.
-* "5.11.11-zen1-1-zen" and "5.10.28-1-lts"
+* garuda-dr460nized-linux-zen-210406 (5.11.11-zen1-1-zen" and "5.10.28-1-lts) using GUI installer with default partitioning + FDE option.
+
+Requirements:
+* System provisioned with TPM
+* TPM chip enabled in UEFI settings
 
 Note: 
 It should work on Arch Linux with minor changes but I haven't tested it.
