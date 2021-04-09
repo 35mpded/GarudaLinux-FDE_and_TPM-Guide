@@ -127,6 +127,7 @@ rm load.context obj.priv obj.pub policy.digest primary.context
 
 ***
 Sources:
+
 https://wiki.archlinux.org/index.php/Trusted_Platform_Module
 
 https://github.com/pawitp/arch-luks-tpm
