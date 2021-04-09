@@ -137,6 +137,11 @@ Create the key
 dd if=/dev/random of=/root/secret.bin bs=32 count=1
 ```
 
+Add the key to luks (if you are using SWAP do it for both encrytped drives)
+```
+cryptsetup luksAddKey /dev/<your drive> /root/secret.bin
+```
+
 Add key to TPM
 ```
 tpm2_createpolicy --policy-pcr -l sha1:0,2,4,7 -L policy.digest
