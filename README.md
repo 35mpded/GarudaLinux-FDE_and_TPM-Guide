@@ -127,9 +127,9 @@ rm load.context obj.priv obj.pub policy.digest primary.context
 
 ***
 Sources:
-https://wiki.archlinux.org/index.php/Trusted_Platform_Module
-https://github.com/pawitp/arch-luks-tpm
-https://pawitp.medium.com/full-disk-encryption-on-arch-linux-backed-by-tpm-2-0-c0892cab9704
-https://github.com/kishorv06/arch-mkinitcpio-clevis-hook
-https://bentley.link/secureboot/
-https://github.com/archont00/arch-linux-luks-tpm-boot
+-https://wiki.archlinux.org/index.php/Trusted_Platform_Module
+-https://github.com/pawitp/arch-luks-tpm
+-https://pawitp.medium.com/full-disk-encryption-on-arch-linux-backed-by-tpm-2-0-c0892cab9704
+-https://github.com/kishorv06/arch-mkinitcpio-clevis-hook
+-https://bentley.link/secureboot/
+-https://github.com/archont00/arch-linux-luks-tpm-boot
