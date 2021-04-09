@@ -59,7 +59,7 @@ note: set the PCR IDs based on your paranoia settings...
     ```sh
     clevis luks bind -d <device> tpm2 '{"pcr_ids":"0,2,4,7"}'
     ```
-3. Install the `clevis` hook
+3. Install the `clevis` hook from [mkinitcpio-clevis-hook](https://github.com/kishorv06/arch-mkinitcpio-clevis-hook)
     ```sh
     ./install.sh
     ```
