@@ -40,7 +40,7 @@ Change this line `HOOKS="base udev autodetect modconf block keyboard keymap cons
 **For Method 1 - Clevis:**
 `HOOKS="base udev autodetect modconf block keyboard keymap consolefont clevis encrypt filesystems"`
 
-**For Method 2 - Custom**
+**For Method 2 - Custom (WIP Avoid for now)**
 `HOOKS="base udev autodetect modconf block keyboard keymap consolefont encrypt-tpm encrypt filesystems"`
 
 * * *
