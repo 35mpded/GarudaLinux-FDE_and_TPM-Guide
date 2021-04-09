@@ -1,7 +1,7 @@
 ### Full Disk Encryption on Garuda Linux backed by TPM 2.0
 
 **Very important note**:
-Make a backup of your data. Any mistakes, while following the guide or incompatabilities may lead to irrevertible data loss!
+*Make a backup of your data. Any mistakes, while following the guide or incompatabilities may lead to irrevertible data loss!*
 
 # Introduction
 
@@ -12,18 +12,16 @@ Requirements:
 * System provisioned with TPM
 * TPM chip enabled in UEFI settings
 
-Note: 
-It should work on Arch Linux with minor changes but I haven't tested it.
+*Note: It should work on Arch Linux with minor changes but I haven't tested it.*
 
 ## Preparations
-**Note:**
-Do not reboot your system until you've finished all the steps or you won't be able to boot. 
+***Very important note: Do not reboot your system until you've finished all the steps or you won't be able to boot.***
 1. Edit the file /etc/crypttab and change:
-	Depending on what is your partition setup, please chose one of the following steps and scip the other:
-	- a. if you are not using swap
-	- b. if you using swap
+	 Choose  A. or B. depending on your partition setup.
+	- A. if you are not using swap
+	- B. if you using swap
 
-**a. (no swap)**
+**A (no swap):**
 From:
 ```sh
 # <name>               <device>                         <password> <options>
@@ -36,7 +34,7 @@ To:
 luks-<id> UUID=<id> none discard
 ```
 
-**b. (swap)**
+**B (swap)**
 From:
 ```sh
 # <name>               <device>                         <password> <options>
