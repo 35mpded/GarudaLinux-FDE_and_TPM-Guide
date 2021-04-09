@@ -29,6 +29,7 @@ From:
 luks-<id> UUID=<id>     /crypto_keyfile.bin luks
 ```
 To:
+
 *note: the device with "none discard" options should be the root partition.*
 ```sh
 # <name>               <device>                         <password> <options>
@@ -43,6 +44,7 @@ From:
 luks-<id> UUID=<id>     /crypto_keyfile.bin luks
 ```
 To:
+
 *note: the device with "/crypto_keyfile.bin" luks should be the spaw partition.*
 the device with "none discard" options should be the root partition.*
 ```sh
