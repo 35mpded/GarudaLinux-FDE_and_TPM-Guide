@@ -38,6 +38,7 @@ luks-<id> UUID=<id> none discard
 ```
 
 **B (swap)**
+
 From:
 ```sh
 # <name>               <device>                         <password> <options>
