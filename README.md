@@ -142,7 +142,7 @@ If you are using lts change `vmlinuz-linux-zen.img` and `initramfs-linux-zen.img
 dd if=/dev/random of=/root/secret.bin bs=32 count=1
 ```
 
-2. Add the key to luks (if you are using SWAP do it for both encrytped drives)
+2. Add the key to luks
 ```
 cryptsetup luksAddKey /dev/<your drive> /root/secret.bin
 ```
