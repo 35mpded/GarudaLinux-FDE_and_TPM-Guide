@@ -155,7 +155,19 @@ tpm2_evictcontrol -C o -c 0x81000000
 
 ...
 
-***
+## Some other important notes:
+If the system un-expectedly asks for LUKS password after reboot it may indicate that your system was compromised.
+
+Always test your system to see if the TPM is handled properly. 
+I suggest the following procedure:
+1. Bind the TPM keys, test if you sucesfully boot without issues.
+   a. If you dont boot: troubleshoot .
+   b. If you do boot: continue to next step.
+2. Clear/delete the keys stored on TPM, preferbly by using the UEFI menu.
+   a. If the system boots: you have a serious issue and you should trobleshoot.
+   b. If the system prompts for password input: you are good to go, just regenerate the TPM binding.
+
+
 Sources:
 
 https://wiki.archlinux.org/index.php/Trusted_Platform_Module
