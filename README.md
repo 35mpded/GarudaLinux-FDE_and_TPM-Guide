@@ -115,7 +115,7 @@ Create the key
 dd if=/dev/random of=/root/secret.bin bs=32 count=1
 ```
 
-#Add key to TPM
+Add key to TPM
 ```
 tpm2_createpolicy --policy-pcr -l sha1:0,2,4,7 -L policy.digest
 tpm2_createprimary -C e -g sha1 -G rsa -c primary.context
@@ -123,6 +123,15 @@ tpm2_create -g sha256 -u obj.pub -r obj.priv -C primary.context -L policy.digest
 tpm2_load -C primary.context -u obj.pub -r obj.priv -c load.context
 tpm2_evictcontrol -C o -c load.context 0x81000000
 rm load.context obj.priv obj.pub policy.digest primary.context
+```
+
+Unseal:
+```sh
+tpm2_unseal -c 0x81000000 -p pcr:sha1:0,7 -o /crypto_keyfile.bin
+```
+Remove key from TPM:
+```sh
+tpm2_evictcontrol -C o -c 0x81000000
 ```
 
 ...
