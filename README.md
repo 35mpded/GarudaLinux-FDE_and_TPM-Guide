@@ -135,7 +135,7 @@ Note:
 If you are using lts change `vmlinuz-linux-zen.img` and `initramfs-linux-zen.img` to `vmlinuz-linux-lts.img` and `initramfs-linux-lts.img`
 
 
-## Method 2 - Custom (WIP)
+## Method 2 - Custom
 
 1. Create the key
 ```
