@@ -1,7 +1,8 @@
-# Full Disk Encryption on Garuda Linux backed by TPM 2.0
+### Full Disk Encryption on Garuda Linux backed by TPM 2.0
 
 **Very important note**:
-Make a backup of your data. If something fails, this guide could lead to irrevertible data loss!
+
+Make a backup of your data. Any mistakes, while following the guide or incompatabilities may lead to irrevertible data loss!
 
 # Introduction
 
