@@ -26,8 +26,8 @@ luks-6eb5f3a9-c2e3-467f-b432-dc7b027d446e UUID=6eb5f3a9-c2e3-467f-b432-dc7b027d4
 to:
 ```sh
 # <name>               <device>                         <password> <options>
-#luks-6eb5f3a9-c2e3-467f-b432-dc7b027d446e UUID=6eb5f3a9-c2e3-467f-b432-dc7b027d446e     /crypto_keyfile.bin luks
-luks-6eb5f3a9-c2e3-467f-b432-dc7b027d446e UUID=6eb5f3a9-c2e3-467f-b432-dc7b027d446e none discard
+#luks-6eb5f3a9 UUID=6eb5f3a9     /crypto_keyfile.bin luks
+luks-6eb5f3a9 UUID=6eb5f3a9 none discard
 
 ```
 2. Delete the file "/crypto_keyfile.bin"
