@@ -7,6 +7,7 @@ Make a backup of your data. If something fails, this guide could lead to irrever
 
 Tested on:
 * garuda-dr460nized-linux-zen-210406 using GUI installer with default partitioning + FDE option.
+* 5.11.11-zen1-1-zen
 
 note: It should work on Arch Linux with minor changes but I haven't tested it.
 
