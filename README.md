@@ -139,3 +139,5 @@ https://github.com/kishorv06/arch-mkinitcpio-clevis-hook
 https://bentley.link/secureboot/
 
 https://github.com/archont00/arch-linux-luks-tpm-boot
+
+https://github.com/saucepan14/TPMSecuredArch
