@@ -22,6 +22,7 @@ Requirements:
 	- B. if you using swap
 
 **A (no swap):**
+
 From:
 ```sh
 # <name>               <device>                         <password> <options>
@@ -35,6 +36,7 @@ luks-<id> UUID=<id> none discard
 ```
 
 **B (swap)**
+
 From:
 ```sh
 # <name>               <device>                         <password> <options>
