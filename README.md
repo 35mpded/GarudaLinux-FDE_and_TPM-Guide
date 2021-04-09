@@ -7,32 +7,49 @@ Make a backup of your data. If something fails, this guide could lead to irrever
 
 Tested on:
 * garuda-dr460nized-linux-zen-210406 using GUI installer with default partitioning + FDE option.
-* 5.11.11-zen1-1-zen
-  note: should work on 5.10.28-1-lts
-* Without swap partition!
+* "5.11.11-zen1-1-zen" and "5.10.28-1-lts"
 
-note: It should work on Arch Linux with minor changes but I haven't tested it.
+Note: 
+It should work on Arch Linux with minor changes but I haven't tested it.
 
 ## Preparations
 **Note:**
 Do not reboot your system until you've finished all the steps or you won't be able to boot. 
 1. Edit the file /etc/crypttab and change:
+	Depending on what is your partition setup, please chose one of the following steps and scip the other:
+	- a. if you are not using swap
+	- b. if you using swap
 
-from:
-```
-# <name>               <device>                         <password> <options>
-luks-6eb5f3a9-c2e3-467f-b432-dc7b027d446e UUID=6eb5f3a9-c2e3-467f-b432-dc7b027d446e     /crypto_keyfile.bin luks
-```
-to:
+**a. (no swap)**
+From:
 ```sh
 # <name>               <device>                         <password> <options>
-#luks-6eb5f3a9 UUID=6eb5f3a9     /crypto_keyfile.bin luks
-luks-6eb5f3a9 UUID=6eb5f3a9 none discard
-
+luks-<id> UUID=<id>     /crypto_keyfile.bin luks
 ```
-2. Delete the file "/crypto_keyfile.bin"
+To:
+```sh
+# <name>               <device>                         <password> <options>
+#luks-<id> UUID=<id>    /crypto_keyfile.bin luks
+luks-<id> UUID=<id> none discard
+```
+
+**b. (swap)**
+From:
+```sh
+# <name>               <device>                         <password> <options>
+luks-<id> UUID=<id>     /crypto_keyfile.bin luks
+```
+To:
+```sh
+# <name>               <device>                         <password> <options>
+#luks-<id> UUID=<id>     /crypto_keyfile.bin luks
+luks-<id> UUID=<id>     /crypto_keyfile.bin luks
+luks-<id> UUID=<id> none discard
+```
+
+2. Delete the file "/crypto_keyfile.bin" (skip this step if you are using swap):
 4. Edit the intial ramdisk conf file `/etc/mkinitcpio.conf`
-Change this line from:
+Change this line from (skip this step if you are using swap):
 `FILES="/crypto_keyfile.bin"`
 to:
 `#FILES="/crypto_keyfile.bin"`
@@ -66,7 +83,7 @@ note: set the PCR IDs based on your paranoia settings...
 
 4. Generate `initramfs` image.
     ```sh
-    mkinitcpio -p linux-zen
+    mkinitcpio -P
     ```
 5. Reboot your system.
 
@@ -107,6 +124,8 @@ objcopy \
 ```
 2. Regenerate the Clevis binding.
 
+Note:
+If you are using lts change `vmlinuz-linux-zen.img` and `initramfs-linux-zen.img` to `vmlinuz-linux-lts.img` and `initramfs-linux-lts.img`
 * * *
 ## Method 2 - Custom (WIP)
 
