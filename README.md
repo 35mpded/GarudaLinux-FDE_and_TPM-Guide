@@ -12,7 +12,7 @@ Tested on:
 Note: 
 It should work on Arch Linux with minor changes but I haven't tested it.
 
-### Preparations
+## Preparations
 **Note:**
 Do not reboot your system until you've finished all the steps or you won't be able to boot. 
 1. Edit the file /etc/crypttab and change:
