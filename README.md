@@ -107,7 +107,7 @@ It is actually recomennded to test this.
 Now you will be notified that the TPM key could not be unsealed, and you will be prompted to enter a password for decryption, to fix this follow the next section **"Clevis Binding"**.
 
 **Regenerate Clevis Binding**
-To generate a new Clevis pin after changes in system configuration that result in different PCR values, run**
+To regenerate a Clevis binding after changes in system configuration that result in different PCR values, run**
 
 1. Find the slot used for the Clevis pin
 `cryptsetup luksDump /dev/sdX`
@@ -121,7 +121,7 @@ clevis luks bind -d <device> tpm2 '{"pcr_bank":"sha256","pcr_ids":"0,1,2,4,7,8"}
 
 
 **Remove Clevis Binding**
-To generate a new Clevis pin after changes in system configuration that result in different PCR values, run**
+To remove a Clevis binding, run**
 
 1. Find the slot used for the Clevis pin
 `cryptsetup luksDump /dev/sdX`
