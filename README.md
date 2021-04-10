@@ -206,10 +206,14 @@ Always test your system to see if the TPM is handled properly.
 I suggest the following procedure:
 1. Bind the TPM keys, test if you sucesfully boot without issues.
 
-   A. If you dont boot: troubleshoot .
+   A. If you dont boot: troubleshoot.
+   
    B. If you do boot: continue to next step.
+   
 2. Clear/delete the keys stored on TPM, preferbly by using the UEFI menu.
+3. 
    A. If the system boots: you have a serious issue and you should trobleshoot.
+   
    B. If the system prompts for password input: you are good to go, just regenerate the TPM binding.
 
 
