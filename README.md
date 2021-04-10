@@ -22,7 +22,7 @@ Requirements:
 2. 
    Choose  **A.(if you are not using swap)** or **B.(if you using swap.)** depending on your partition setup.
 
-***A:**
+**A:**
 
 From:
 ```sh
@@ -37,7 +37,7 @@ To:
 luks-<id> UUID=<id> none discard
 ```
 
-***B:**
+**B:**
 
 From:
 ```sh
@@ -46,8 +46,7 @@ luks-<id> UUID=<id>     /crypto_keyfile.bin luks
 ```
 To:
 
-*Note: the device with "/crypto_keyfile.bin" luks should be the swap partition.*
-the device with "none discard" options should be the root partition.*
+*Note: the device with "/crypto_keyfile.bin luks" parameters should be the swap partition, where the device with "none discard" parameters should be the root partition.*
 ```sh
 # <name>               <device>                         <password> <options>
 #luks-<id> UUID=<id>     /crypto_keyfile.bin luks
