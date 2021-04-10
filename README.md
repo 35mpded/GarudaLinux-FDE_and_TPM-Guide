@@ -13,7 +13,7 @@ Requirements:
 * System provisioned with TPM
 * TPM chip enabled in UEFI settings
 
-*Note: It should work on Arch Linux with minor changes but I haven't tested it.*
+***Note**: It should work on Arch Linux with minor changes but I haven't tested it.*
 
 
 ## Preparations
@@ -46,7 +46,7 @@ luks-<id> UUID=<id>     /crypto_keyfile.bin luks
 ```
 To:
 
-*Note: the device with "/crypto_keyfile.bin luks" parameters should be the swap partition, where the device with "none discard" parameters should be the root partition.*
+***Note**: the device with "/crypto_keyfile.bin luks" parameters should be the swap partition, where the device with "none discard" parameters should be the root partition.*
 ```sh
 # <name>               <device>                         <password> <options>
 #luks-<id> UUID=<id>     /crypto_keyfile.bin luks
@@ -78,7 +78,7 @@ Change this line `HOOKS="base udev autodetect modconf block keyboard keymap cons
     pacman --needed -S clevis tpm2-tools luksmeta libpwquality
     ```
 2. Add `clevis` binding to your LUKS device
-note: set the PCR IDs based on your paranoia settings...
+**note:** *set the PCR IDs based on your paranoia settings...*
     ```sh
     clevis luks bind -d <device> tpm2 '{"pcr_bank":"sha256","pcr_ids":"0,1,2,4,7,8"}'
     ```
