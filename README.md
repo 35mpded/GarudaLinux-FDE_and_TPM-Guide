@@ -19,9 +19,10 @@ Requirements:
 ## Preparations
 ***Very important note: Do not reboot your system until you've finished all the steps or you won't be able to boot.***
 1. Edit the file /etc/crypttab and change:
-   Choose  A.(if you are not using swap) or B.(if you using swap.) depending on your partition setup.
+2. 
+   Choose  **A.(if you are not using swap)** or **B.(if you using swap.)** depending on your partition setup.
 
-**A (no swap):**
+***A:**
 
 From:
 ```sh
@@ -36,7 +37,7 @@ To:
 luks-<id> UUID=<id> none discard
 ```
 
-**B (swap)**
+***B:**
 
 From:
 ```sh
