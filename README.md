@@ -3,9 +3,11 @@
 **Very important note**:
 *Make a backup of your data. Any incompatibilities, or mistakes while following the procedures, may lead to irrevertible data loss!!!*
 
+
 # Introduction
 
-Tested on:* garuda-dr460nized-linux-zen-210406 (5.11.11-zen1-1-zen" and "5.10.28-1-lts) using GUI installer with default partitioning + FDE option.
+Tested on:
+* garuda-dr460nized-linux-zen-210406 (5.11.11-zen1-1-zen" and "5.10.28-1-lts) using GUI installer with default partitioning + FDE option.
 
 Requirements:
 * System provisioned with TPM
@@ -13,14 +15,17 @@ Requirements:
 
 *Note: It should work on Arch Linux with minor changes but I haven't tested it.*
 
+
 ## Preparations
 ***Very important note: Do not reboot your system until you've finished all the steps or you won't be able to boot.***
 1. Edit the file /etc/crypttab and change:
 
 Choose  A. or B. depending on your partition setup.
 
-A. if you are not using swap</kbd>
+A. if you are not using swap
+
 B. if you using swap.
+
 
 **A (no swap):**
 
@@ -46,7 +51,7 @@ luks-<id> UUID=<id>     /crypto_keyfile.bin luks
 ```
 To:
 
-*note: the device with "/crypto_keyfile.bin" luks should be the swap partition.*
+*Note: the device with "/crypto_keyfile.bin" luks should be the swap partition.*
 the device with "none discard" options should be the root partition.*
 ```sh
 # <name>               <device>                         <password> <options>
