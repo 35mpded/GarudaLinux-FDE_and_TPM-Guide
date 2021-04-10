@@ -115,7 +115,7 @@ To generate a new Clevis pin after changes in system configuration that result i
 `clevis luks unbind -d /dev/sdX -s keyslot`
 3. Add a new Clevis binding.
 `
-clevis luks bind -d <device> tpm2 '{"pcr_ids":"0,2,4,7"}'
+clevis luks bind -d <device> tpm2 '{"pcr_bank":"sha256","pcr_ids":"0,1,2,4,7,8"}'
 `
 4. Reboot, the disk now should be decrypted using the key from TPM.
 
@@ -161,12 +161,18 @@ rm load.context obj.priv obj.pub policy.digest primary.context
 ```sh
 tpm2_unseal -c 0x81000000 -p pcr:sha1:0,7 -o /crypto_keyfile.bin
 ```
+5. Install the hooks:
+`
+git clone https://github.com/SubXi/GarudaLinux-FDE_and_TPM-Guide.git
+chmod +x install.sh
+sudo ./install.sh
+`
 
-5. Rebuild inital ramdisk 
+6. Rebuild inital ramdisk 
 ```
 mkinitcpio -P
 ```
-6. Avoid password prompt in GRUB (OPTIONAL)
+7. Avoid password prompt in GRUB (OPTIONAL)
 Rebuilt the EFI image using:
 ```
 objcopy \
