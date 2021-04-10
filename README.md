@@ -81,7 +81,7 @@ Change this line `HOOKS="base udev autodetect modconf block keyboard keymap cons
 2. Add `clevis` binding to your LUKS device
 note: set the PCR IDs based on your paranoia settings...
     ```sh
-    clevis luks bind -d <device> tpm2 '{"pcr_ids":"0,2,4,7"}'
+    clevis luks bind -d <device> tpm2 '{"pcr_bank":"sha256","pcr_ids":"0,1,2,4,7,8"}'
     ```
 3. Install the `clevis` hook from [mkinitcpio-clevis-hook](https://github.com/kishorv06/arch-mkinitcpio-clevis-hook)
     ```sh
@@ -112,12 +112,21 @@ To generate a new Clevis pin after changes in system configuration that result i
 1. Find the slot used for the Clevis pin
 `cryptsetup luksDump /dev/sdX`
 2. Remove the Clevis binding, run:
-`clevis luks unbind -d /dev/sdX -s keyslot`
+`clevis luks regen -d /dev/sdX -s keyslot`
 3. Add a new Clevis binding.
 `
 clevis luks bind -d <device> tpm2 '{"pcr_bank":"sha256","pcr_ids":"0,1,2,4,7,8"}'
 `
 4. Reboot, the disk now should be decrypted using the key from TPM.
+
+
+**Remove Clevis Binding**
+To generate a new Clevis pin after changes in system configuration that result in different PCR values, run**
+
+1. Find the slot used for the Clevis pin
+`cryptsetup luksDump /dev/sdX`
+2. Remove the Clevis binding, run:
+`clevis luks unbind -d /dev/sdX -s keyslot`
 
 **Avoid password prompt in GRUB (OPTIONAL)**
 1.Rebuilt the EFI image using:
