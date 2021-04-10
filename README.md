@@ -3,11 +3,9 @@
 **Very important note**:
 *Make a backup of your data. Any incompatibilities, or mistakes while following the procedures, may lead to irrevertible data loss!!!*
 
-
 # Introduction
 
-Tested on:
-* garuda-dr460nized-linux-zen-210406 (5.11.11-zen1-1-zen" and "5.10.28-1-lts) using GUI installer with default partitioning + FDE option.
+Tested on:<br/>* garuda-dr460nized-linux-zen-210406 (5.11.11-zen1-1-zen" and "5.10.28-1-lts) using GUI installer with default partitioning + FDE option.
 
 Requirements:
 * System provisioned with TPM
