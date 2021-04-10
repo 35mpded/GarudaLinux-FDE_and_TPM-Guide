@@ -1,8 +1,7 @@
 ### Full Disk Encryption on Garuda Linux backed by TPM 2.0
 
 
-**Very important note**:
-*Make a backup of your data. Any incompatibilities, or mistakes while following the procedures, may lead to irrevertible data loss!!!*
+**Very important note:** *Make a backup of your data. Any incompatibilities, or mistakes while following the procedures, may lead to irrevertible data loss!*
 
 
 # Introduction
@@ -19,54 +18,49 @@ Requirements:
 ## Preparations
 ***Very important note**: Do not reboot your system until you've finished all the steps or you won't be able to boot.*
 1. Edit the file /etc/crypttab and change:
-2. 
-   Choose **A.(if you are not using swap)** or **B.(if you using swap.)** depending on your partition setup.
+2. Choose **A.(if you are not using swap)** or **B.(if you using swap.)** depending on your partition setup.
 
-**A:**
 
-From:
-```sh
+***Note**: The device with "/crypto_keyfile.bin luks" parameters should be the swap partition, where the device with "none discard" parameters should be the root partition.*
+
+**(A)** From:
+```
 # <name>               <device>                         <password> <options>
 luks-<id> UUID=<id>     /crypto_keyfile.bin luks
 ```
-To:
+**(A)** To:
 
-```sh
+```
 # <name>               <device>                         <password> <options>
 #luks-<id> UUID=<id>    /crypto_keyfile.bin luks
 luks-<id> UUID=<id> none discard
 ```
 
-**B:**
-
-From:
+**(B)** From:
 ```sh
 # <name>               <device>                         <password> <options>
 luks-<id> UUID=<id>     /crypto_keyfile.bin luks
 ```
-To:
-
-***Note**: the device with "/crypto_keyfile.bin luks" parameters should be the swap partition, where the device with "none discard" parameters should be the root partition.*
-```sh
+**(B)** To:
+```
 # <name>               <device>                         <password> <options>
 #luks-<id> UUID=<id>     /crypto_keyfile.bin luks
 luks-<id> UUID=<id>     /crypto_keyfile.bin luks
 luks-<id> UUID=<id> none discard
 ```
+3. Delete the file "/crypto_keyfile.bin" (skip this step if you are using swap):
 
-2. Delete the file "/crypto_keyfile.bin" (skip this step if you are using swap):
-4. Edit the intial ramdisk conf file `/etc/mkinitcpio.conf`
-Change this line from (do NOT skip this step, even if you are using swap):
-`FILES="/crypto_keyfile.bin"`
+4. ***(do NOT skip this step!)*** Edit the intial ramdisk conf file `/etc/mkinitcpio.conf` and change this line from: `FILES="/crypto_keyfile.bin"`
 to:
 `#FILES="/crypto_keyfile.bin"`
-6. Based on which method you choose set the hooks in `/etc/mkinitcpio.conf`
+
+5. Edit `/etc/mkinitcpio.conf`, set the respective hooks based of which method you choose:</br>
 Change this line `HOOKS="base udev autodetect modconf block keyboard keymap consolefont plymouth encrypt filesystems"` to the following:
 
-**For Method 1 - Clevis:**
+* **For Method 1 - Clevis:**</br>
 `HOOKS="base udev autodetect modconf block keyboard keymap consolefont clevis encrypt filesystems"`
 
-**For Method 2 - Custom (WIP Avoid for now)**
+* **For Method 2 - Custom (WIP Avoid for now)**</br>
 `HOOKS="base udev autodetect modconf block keyboard keymap consolefont encrypt-tpm encrypt filesystems"`
 
 ## Method 1 - Clevis
@@ -74,39 +68,39 @@ Change this line `HOOKS="base udev autodetect modconf block keyboard keymap cons
 **Setup**:
 
 1. Install the following packages.
-    ```sh
-    pacman --needed -S clevis tpm2-tools luksmeta libpwquality
-    ```
-2. Add `clevis` binding to your LUKS device
-**note:** *set the PCR IDs based on your paranoia settings...*
-    ```sh
-    clevis luks bind -d <device> tpm2 '{"pcr_bank":"sha256","pcr_ids":"0,1,2,4,7,8"}'
-    ```
+```
+pacman --needed -S clevis tpm2-tools luksmeta libpwquality
+```
+2. Add `clevis` binding to your LUKS device </br>
+**Note:** Set the [PCR registers](https://wiki.archlinux.org/index.php/Trusted_Platform_Module#Accessing_PCR_registers) based on your paranoia setting...
+```
+clevis luks bind -d <device> tpm2 '{"pcr_bank":"sha256","pcr_ids":"0,1,2,4,7,8"}'
+```
 3. Install the `clevis` hook from [mkinitcpio-clevis-hook](https://github.com/kishorv06/arch-mkinitcpio-clevis-hook)
-    ```sh
-    ./install.sh
-    ```
+```
+git clone https://github.com/kishorv06/arch-mkinitcpio-clevis-hook.git
+cd arch-mkinitcpio-clevis-hook
+./install.sh
+```
 
-4. Generate `initramfs` image.
-    ```sh
-    mkinitcpio -P
-    ```
-5. Reboot your system.
-
-Now your disk should get decrypted using the key from TPM.
+4. Regenerate `initramfs` image.
+```
+mkinitcpio -P
+```
+5. Reboot your system. Now your disk should get decrypted using the key from TPM.
 
 **Note:**
 If integrity on your system is changed you will get prompted to manually enter the password for decryption since TPM will not be able to unseal the key.
 
-It is actually recomennded to test this.
-1. Open your UFEI settings 
-2. Find the TPM settings (most common location is in security)
+It is actually recomended to test this.
+1. Open your UEFI settings. 
+2. Find the TPM settings (most common location is in security).
 3. Delete the keys.
-4. Boot
+4. Boot. 
 Now you will be notified that the TPM key could not be unsealed, and you will be prompted to enter a password for decryption, to fix this follow the next section **"Clevis Binding"**.
 
-**Regenerate Clevis Binding**
-To regenerate a Clevis binding after changes in system configuration that result in different PCR values, run**
+**Regenerate Clevis Binding**</br>
+To regenerate a Clevis binding after changes in system configuration that result in different PCR values:
 
 1. Find the slot used for the Clevis pin
 `cryptsetup luksDump /dev/sdX`
@@ -119,8 +113,8 @@ clevis luks bind -d <device> tpm2 '{"pcr_bank":"sha256","pcr_ids":"0,1,2,4,7,8"}
 4. Reboot, the disk now should be decrypted using the key from TPM.
 
 
-**Remove Clevis Binding**
-To remove a Clevis binding, run**
+**Remove Clevis Binding**</br>
+To remove a Clevis binding:
 
 1. Find the slot used for the Clevis pin
 `cryptsetup luksDump /dev/sdX`
@@ -137,10 +131,10 @@ objcopy \
     --add-section .initrd="/boot/initramfs-linux-zen.img" --change-section-vma .initrd=0x3000000 \
     "/usr/lib/systemd/boot/efi/linuxx64.efi.stub" "/boot/efi/EFI/Garuda/grubx64.efi"
 ```
-2. Regenerate the Clevis binding.
+2. Regenerate the Clevis binding. 
 
-Note:
-If you are using lts change `vmlinuz-linux-zen.img` and `initramfs-linux-zen.img` to `vmlinuz-linux-lts.img` and `initramfs-linux-lts.img`
+**Note:**
+If you are using LTS  change `vmlinuz-linux-zen.img` and `initramfs-linux-zen.img` to `vmlinuz-linux-lts.img` and `initramfs-linux-lts.img`
 
 
 ## Method 2 - Custom
@@ -169,18 +163,17 @@ rm load.context obj.priv obj.pub policy.digest primary.context
 ```sh
 tpm2_unseal -c 0x81000000 -p pcr:sha1:0,7 -o /crypto_keyfile.bin
 ```
-5. Install the hooks:
-`
+5. Install the hooks:</br>
+```
 git clone https://github.com/SubXi/GarudaLinux-FDE_and_TPM-Guide.git
 chmod +x install.sh
 sudo ./install.sh
-`
-
+```
 6. Rebuild inital ramdisk 
 ```
 mkinitcpio -P
 ```
-7. Avoid password prompt in GRUB (OPTIONAL)
+7. (OPTIONAL) Avoid password prompt in GRUB using EFI kernel STUB.</br>
 Rebuilt the EFI image using:
 ```
 objcopy \
@@ -190,33 +183,33 @@ objcopy \
     --add-section .initrd="/boot/initramfs-linux-zen.img" --change-section-vma .initrd=0x3000000 \
     "/usr/lib/systemd/boot/efi/linuxx64.efi.stub" "/boot/efi/EFI/Garuda/grubx64.efi"
 ```
-After reboot you should get prompted to input the password manually. This behaviour is expected since you change your EFI image.
-Remove Remove key from TPM and redo step 3. :
-```sh
+
+**Note:**
+After reboot you should get prompted to input the password manually. This behaviour is expected since you change your EFI image. Remove the key from TPM using the below command and redo step 3:
+```
 tpm2_evictcontrol -C o -c 0x81000000
 ```
 
-...
 
 ## Some other important notes:
 If the system un-expectedly asks for LUKS password after reboot it may indicate that your system was compromised.
 
-Always test your system to see if the TPM is handled properly. 
+Always test your system to see if the TPM is handled properly.</br> 
 I suggest the following procedure:
 1. Bind the TPM keys, test if you sucesfully boot without issues.
 
-   A. If you dont boot: troubleshoot.
+   A. If you don't boot: troubleshoot.
    
    B. If you do boot: continue to next step.
    
-2. Clear/delete the keys stored on TPM, preferbly by using the UEFI menu.
+2. Clear/delete the keys stored on TPM, preferably by using the UEFI menu.
 
    A. If the system boots: you have a serious issue and you should trobleshoot.
    
    B. If the system prompts for password input: you are good to go, just regenerate the TPM binding.
 
-
-Sources:
+***
+Sources and relevant material:
 
 https://wiki.archlinux.org/index.php/Trusted_Platform_Module
 
