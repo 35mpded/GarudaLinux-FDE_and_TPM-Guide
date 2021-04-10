@@ -5,7 +5,7 @@
 
 # Introduction
 
-Tested on:<br/>* garuda-dr460nized-linux-zen-210406 (5.11.11-zen1-1-zen" and "5.10.28-1-lts) using GUI installer with default partitioning + FDE option.
+Tested on:* garuda-dr460nized-linux-zen-210406 (5.11.11-zen1-1-zen" and "5.10.28-1-lts) using GUI installer with default partitioning + FDE option.
 
 Requirements:
 * System provisioned with TPM
@@ -16,11 +16,9 @@ Requirements:
 ## Preparations
 ***Very important note: Do not reboot your system until you've finished all the steps or you won't be able to boot.***
 1. Edit the file /etc/crypttab and change:
-2. 
-Choose  A. or B. depending on your partition setup.
-
-A. if you are not using swap
-B. if you using swap
+	 Choose  A. or B. depending on your partition setup.
+	  A. if you are not using swap
+	  B. if you using swap
 
 **A (no swap):**
 
