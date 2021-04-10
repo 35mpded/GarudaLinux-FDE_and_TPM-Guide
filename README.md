@@ -19,8 +19,8 @@ Requirements:
 ***Very important note: Do not reboot your system until you've finished all the steps or you won't be able to boot.***
 1. Edit the file /etc/crypttab and change:
 	 Choose  A. or B. depending on your partition setup.
-	- A. if you are not using swap
-	- B. if you using swap
+	  A. if you are not using swap
+	  B. if you using swap
 
 **A (no swap):**
 
