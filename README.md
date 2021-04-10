@@ -1,11 +1,11 @@
 ### Full Disk Encryption on Garuda Linux backed by TPM 2.0
 
+
 **Very important note**:
 *Make a backup of your data. Any incompatibilities, or mistakes while following the procedures, may lead to irrevertible data loss!!!*
 
 
 # Introduction
-
 Tested on:
 * garuda-dr460nized-linux-zen-210406 (5.11.11-zen1-1-zen" and "5.10.28-1-lts) using GUI installer with default partitioning + FDE option.
 
@@ -17,10 +17,10 @@ Requirements:
 
 
 ## Preparations
-***Very important note: Do not reboot your system until you've finished all the steps or you won't be able to boot.***
+***Very important note**: Do not reboot your system until you've finished all the steps or you won't be able to boot.*
 1. Edit the file /etc/crypttab and change:
 2. 
-   Choose  **A.(if you are not using swap)** or **B.(if you using swap.)** depending on your partition setup.
+   Choose **A.(if you are not using swap)** or **B.(if you using swap.)** depending on your partition setup.
 
 **A:**
 
