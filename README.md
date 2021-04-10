@@ -20,7 +20,7 @@ Requirements:
 Choose  A. or B. depending on your partition setup.
 
 A. if you are not using swap
-B. if you using swap
+B. if you using swap.
 
 **A (no swap):**
 
