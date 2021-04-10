@@ -17,9 +17,8 @@ Requirements:
 
 ## Preparations
 ***Very important note**: Do not reboot your system until you've finished all the steps or you won't be able to boot.*
-1. Edit the file /etc/crypttab and change:
-2. Choose **A.(if you are not using swap)** or **B.(if you using swap.)** depending on your partition setup.
-
+1. Edit the file /etc/crypttab and change:</br>
+ Choose depending on your partition setup **A. (if you are not using swap)** or **B. (if you using swap)**.
 
 ***Note**: The device with "/crypto_keyfile.bin luks" parameters should be the swap partition, where the device with "none discard" parameters should be the root partition.*
 
@@ -32,21 +31,20 @@ luks-<id> UUID=<id>     /crypto_keyfile.bin luks
 
 ```
 # <name>               <device>                         <password> <options>
-#luks-<id> UUID=<id>    /crypto_keyfile.bin luks
 luks-<id> UUID=<id> none discard
 ```
 
 **(B)** From:
-```sh
+```
 # <name>               <device>                         <password> <options>
+luks-<id> UUID=<id>     /crypto_keyfile.bin luks
 luks-<id> UUID=<id>     /crypto_keyfile.bin luks
 ```
 **(B)** To:
 ```
 # <name>               <device>                         <password> <options>
-#luks-<id> UUID=<id>     /crypto_keyfile.bin luks
-luks-<id> UUID=<id>     /crypto_keyfile.bin luks
 luks-<id> UUID=<id> none discard
+luks-<id> UUID=<id>     /crypto_keyfile.bin luks
 ```
 3. Delete the file "/crypto_keyfile.bin" (skip this step if you are using swap):
 
