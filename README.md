@@ -16,7 +16,7 @@
 
 ***Notes:***
 * *It should work on Arch Linux with some minor changes, but I haven't tested it.*
-* *Custom partition layout should also work, but you'll have to adjust the crypttab and TPM bindings accordingly.*
+* *Custom partition layout should work as well, but you'll have to adjust the crypttab and TPM bindings accordingly.*
 * *If you are stuck on the loading screen press ESC.*
 
 ## Preparations
