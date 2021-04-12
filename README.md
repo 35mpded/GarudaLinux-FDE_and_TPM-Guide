@@ -16,7 +16,7 @@ Requirements:
 
 ***Note**: It should work on Arch Linux with some minor changes but I haven't tested it.*
 
-Custom partition layout should also work, but you'll have to adjust the crypttab accordingly.
+Custom partition layout should also work, but you'll have to adjust the crypttab and TPM bindings accordingly.
 
 
 ## Preparations
