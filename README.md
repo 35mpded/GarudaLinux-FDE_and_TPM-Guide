@@ -14,7 +14,7 @@ Requirements:
 * System provisioned with TPM
 * TPM chip enabled in UEFI settings
 
-***Note**: It should work on Arch Linux with minor changes but I haven't tested it.*
+***Note**: It should work on Arch Linux with some minor changes but I haven't tested it.*
 
 
 ## Preparations
