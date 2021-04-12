@@ -8,13 +8,13 @@ Tested on:
 * OS: "garuda-dr460nized-linux-zen-210406"
 * Kernel: "5.11.11-zen1-1-zen" and "5.10.28-1-lts"
 * Installed using default GUI installer
-* Installed default partitioning (swap or no swap) + FDE option enabled.
+* Installed using default partitioning (swap or no swap) + FDE option enabled.
 
 Requirements:
 * System provisioned with TPM
 * TPM chip enabled in UEFI settings
 
-***Note**: It should work on Arch Linux with some minor changes but I haven't tested it.*
+***Note**: It should work on Arch Linux with some minor changes but I haven't tested it.*</br> Custom partitions should also work, but you'll have to adjust the crypttab accordingly.
 
 
 ## Preparations
