@@ -4,17 +4,17 @@
 
 
 # Introduction
-Tested on:
+**Tested on:**
 * OS: "garuda-dr460nized-linux-zen-210406"
 * Kernel: "5.11.11-zen1-1-zen" and "5.10.28-1-lts"
 * Installed using default GUI installer
 * Installed using default partitioning (swap or no swap) + FDE option enabled.
 
-Requirements:
+**Requirements:**
 * System provisioned with TPM
 * TPM chip enabled in UEFI settings
 
-***Notes***: </br>
+***Notes:***
 * *It should work on Arch Linux with some minor changes but I haven't tested it.*
 * *Custom partition layout should also work, but you'll have to adjust the crypttab and TPM bindings accordingly.*
 * *If you are stuck on the loading screen press ESC.*
