@@ -17,7 +17,7 @@
 ***Notes:***
 * *It should work on Arch Linux with some minor changes, but I haven't tested it.*
 * *Custom partition layout should work as well, but you'll have to adjust the crypttab and TPM bindings accordingly.*
-* *Secure Boot can be enabled if you sign your EFI image, but this guide will not go there...*
+* *This setup can work with Secure Boot if you sign your EFI image, but this guide will not go there...*
 * *If you are stuck on the loading screen press ESC.*
 
 ## Preparations
