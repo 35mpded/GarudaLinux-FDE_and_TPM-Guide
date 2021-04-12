@@ -14,7 +14,9 @@ Requirements:
 * System provisioned with TPM
 * TPM chip enabled in UEFI settings
 
-***Note**: It should work on Arch Linux with some minor changes but I haven't tested it.*</br> Custom partitions should also work, but you'll have to adjust the crypttab accordingly.
+***Note**: It should work on Arch Linux with some minor changes but I haven't tested it.*
+
+Custom partitions should also work, but you'll have to adjust the crypttab accordingly.
 
 
 ## Preparations
