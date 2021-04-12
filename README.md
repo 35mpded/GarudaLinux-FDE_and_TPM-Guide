@@ -14,10 +14,10 @@ Requirements:
 * System provisioned with TPM
 * TPM chip enabled in UEFI settings
 
-***Note**: It should work on Arch Linux with some minor changes but I haven't tested it.*
-
-Custom partition layout should also work, but you'll have to adjust the crypttab and TPM bindings accordingly.
-
+***Note**: 
+* It should work on Arch Linux with some minor changes but I haven't tested it.*
+* Custom partition layout should also work, but you'll have to adjust the crypttab and TPM bindings accordingly.
+* If you are stuck on the loading screen press ESC.
 
 ## Preparations
 ***Very important note**: Do not reboot your system until you've finished all the steps or you won't be able to boot.*
