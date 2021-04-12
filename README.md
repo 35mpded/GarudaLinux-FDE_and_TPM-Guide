@@ -5,7 +5,10 @@
 
 # Introduction
 Tested on:
-* garuda-dr460nized-linux-zen-210406 (5.11.11-zen1-1-zen" and "5.10.28-1-lts) using GUI installer with default partitioning + FDE option.
+* OS: garuda-dr460nized-linux-zen-210406 
+* Kernel: "5.11.11-zen1-1-zen" and "5.10.28-1-lts"
+* Default GUI installer
+* Default partitioning (swap and no swap) + FDE option enabled.
 
 Requirements:
 * System provisioned with TPM
