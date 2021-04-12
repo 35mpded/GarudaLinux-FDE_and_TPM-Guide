@@ -5,7 +5,7 @@
 
 # Introduction
 Tested on:
-* OS: garuda-dr460nized-linux-zen-210406 
+* OS: "garuda-dr460nized-linux-zen-210406"
 * Kernel: "5.11.11-zen1-1-zen" and "5.10.28-1-lts"
 * Default GUI installer
 * Default partitioning (swap and no swap) + FDE option enabled.
