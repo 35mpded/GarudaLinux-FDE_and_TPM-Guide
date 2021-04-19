@@ -1,6 +1,6 @@
 ### Full Disk Encryption on Garuda Linux backed by TPM 2.0
 
-***Very important note:*** *Make a backup of your data. Any incompatibilities, or mistakes while following the procedures in this guide, could lead to irrevertible data loss!*
+***Very important note:*** *Make a backup of your data. Any incompatibilities or mistakes while following the procedures in this guide could lead to irreversible data loss!*
 
 
 # Introduction
@@ -21,9 +21,9 @@
 * *If you are stuck on the loading screen press ESC.*
 
 ## Preparations
-***Very important note**: Do not reboot your system until you've finished all the steps or you won't be able to boot.*
+***Very important note**: Do not reboot your system until you've finished all the steps, or you won't be able to boot.*
 1. Edit the file /etc/crypttab and change:</br>
- Choose depending on your partition setup **A. (if you are not using swap)** or **B. (if you using swap)**.
+ Choose depending on your partition setup **A. (if you you're not using swap)** or **B. (if you're using swap)**.
 
 ***Note**: The device with "/crypto_keyfile.bin luks" parameters should be the swap partition, where the device with "none discard" parameters should be the root partition.*
 
@@ -93,25 +93,25 @@ mkinitcpio -P
 5. Reboot your system. Now your disk should get decrypted using the key from TPM.
 
 **Note:**
-If integrity on your system is changed you will get prompted to manually enter the password for decryption since TPM will not be able to unseal the key.
+If integrity on your system is changed, you will get prompted to manually enter the password for decryption since TPM will not be able to unseal the key.
 
 It is actually recomended to test this.
 1. Open your UEFI settings. 
-2. Find the TPM settings (most common location is in security).
+2. Find the TPM settings (most common location is in security menu/tab).
 3. Delete the keys.
 4. Boot. 
 Now you will be notified that the TPM key could not be unsealed, and you will be prompted to enter a password for decryption, to fix this follow the next section **"Clevis Binding"**.
 
 **Regenerate Clevis Binding**</br>
-To regenerate a Clevis binding after changes in system configuration that result in different PCR values:
+To regenerate a Clevis binding after changes in system's configuration that result in different PCR values:
 
 1. Find the slot used for the Clevis pin
-`cryptsetup luksDump /dev/sdX`
+`cryptsetup luksDump <luskDevice>`
 2. Remove the Clevis binding, run:
-`clevis luks regen -d /dev/sdX -s keyslot`
+`clevis luks regen -d <luksDevice> -s <keySlot>`
 3. Add a new Clevis binding.
 `
-clevis luks bind -d <device> tpm2 '{"pcr_bank":"sha256","pcr_ids":"0,1,2,4,7,8"}'
+clevis luks bind -d <luksDevice> tpm2 '{"pcr_bank":"sha256","pcr_ids":"0,1,2,4,7,8"}'
 `
 4. Reboot, the disk now should be decrypted using the key from TPM.
 
@@ -120,9 +120,9 @@ clevis luks bind -d <device> tpm2 '{"pcr_bank":"sha256","pcr_ids":"0,1,2,4,7,8"}
 To remove a Clevis binding:
 
 1. Find the slot used for the Clevis pin
-`cryptsetup luksDump /dev/sdX`
+`cryptsetup luksDump <luksDevice>`
 2. Remove the Clevis binding, run:
-`clevis luks unbind -d /dev/sdX -s keyslot`
+`clevis luks unbind -d <luksDevice> -s <keySlot>`
 
 **Avoid password prompt in GRUB (OPTIONAL)**
 1.Rebuilt the EFI image using:
@@ -149,7 +149,7 @@ dd if=/dev/random of=/root/secret.bin bs=32 count=1
 
 2. Add the key to luks
 ```
-cryptsetup luksAddKey /dev/<your drive> /root/secret.bin
+cryptsetup luksAddKey /dev/<luksDevice> /root/secret.bin
 ```
 
 3. Add key to TPM
@@ -188,28 +188,28 @@ objcopy \
 ```
 
 **Note:**
-After reboot you should get prompted to input the password manually. This behaviour is expected since you change your EFI image. Remove the key from TPM using the below command and redo step 3:
+After reboot, you should get prompted to input the password manually. This behavior is expected since you change your EFI image. Remove the key from TPM using the below command and redo step 3:
 ```
 tpm2_evictcontrol -C o -c 0x81000000
 ```
 
 
 ## Some other important notes:
-If the system un-expectedly asks for LUKS password after reboot it may indicate that your system was compromised.
+If the system unexpectedly asks for LUKS password after reboot it may indicate that your system was compromised.
 
 Always test your system to see if the TPM is handled properly.</br> 
 I suggest the following procedure:
-1. Bind the TPM keys, test if you sucesfully boot without issues.
+1. Bind the TPM keys, test if you successfully boot without issues.
 
    A. If you don't boot: troubleshoot.
    
-   B. If you do boot: continue to next step.
+   B. If you do boot: continue to the next step.
    
 2. Clear/delete the keys stored on TPM, preferably by using the UEFI menu.
 
-   A. If the system boots: you have a serious issue and you should trobleshoot.
+   A. If the system boots: you have a serious issue and you should troubleshoot.
    
-   B. If the system prompts for password input: you are good to go, just regenerate the TPM binding.
+   B. If the system prompts for password input: you are good to go just regenerate the TPM binding.
 
 ***
 Sources and relevant material:
