@@ -188,7 +188,7 @@ objcopy \
 ```
 
 **Note:**
-After reboot, you should get prompted to input the password manually. This behavior is expected since you change your EFI image. Remove the key from TPM using the below command and redo step 3:
+After reboot, you should get prompted to input the password manually. This behavior is expected since you changed your EFI image. Remove the key from TPM using the below command and redo step 3:
 ```
 tpm2_evictcontrol -C o -c 0x81000000
 ```
